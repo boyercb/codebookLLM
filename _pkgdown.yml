@@ -1,0 +1,13 @@
+url: ~
+template:
+  bootstrap: 5
+
+reference:
+  - title: Code books
+    contents:
+      - llm_codebook
+      - print.llm_codebook
+  - title: Package
+    contents:
+      - codebookLLM-package
+

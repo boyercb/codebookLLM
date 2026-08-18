@@ -1,0 +1,22 @@
+Package: codebookLLM
+Title: PHI-Safe, LLM-Oriented Code Books for Data Frames
+Version: 0.0.0.9000
+Authors@R: 
+    person("Christopher", "Boyer", , "boyerc5@ccf.org", role = c("aut", "cre"))
+Description: Generates compact, machine-parseable code books that describe
+    the structure of a data frame - names, classes, roles, missingness,
+    cardinality, factor levels and the shape of numeric variables -
+    without exposing row-level data. The output is designed to be pasted
+    into a large language model prompt so that code can be written against
+    a dataset that may contain protected health information.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Suggests: 
+    testthat (>= 3.0.0),
+    withr
+Config/testthat/edition: 3
+Imports: 
+    stats,
+    utils
