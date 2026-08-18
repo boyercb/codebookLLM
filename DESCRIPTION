@@ -20,3 +20,5 @@ Config/testthat/edition: 3
 Imports: 
     stats,
     utils
+URL: https://github.com/boyercb/codebookLLM, http://christopherbboyer.com/codebookLLM/
+BugReports: https://github.com/boyercb/codebookLLM/issues

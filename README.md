@@ -1,5 +1,10 @@
 # codebookLLM
 
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/boyercb/codebookLLM/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/boyercb/codebookLLM/actions/workflows/R-CMD-check.yaml)
+[![pkgdown](https://github.com/boyercb/codebookLLM/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/boyercb/codebookLLM/actions/workflows/pkgdown.yaml)
+<!-- badges: end -->
+
 Compact, machine-parseable code books for data frames, designed to be pasted
 into a large language model prompt so the model can write correct code against a
 dataset **without ever seeing row-level data**.
@@ -13,7 +18,7 @@ stored as text, unused factor levels, candidate primary keys, duplicate rows).
 
 ```r
 # install.packages("pak")
-pak::pak("codebookLLM")
+pak::pak("boyercb/codebookLLM")
 ```
 
 ## Usage

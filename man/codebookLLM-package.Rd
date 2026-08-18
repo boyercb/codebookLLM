@@ -8,6 +8,15 @@
 \description{
 Generates compact, machine-parseable code books that describe the structure of a data frame - names, classes, roles, missingness, cardinality, factor levels and the shape of numeric variables - without exposing row-level data. The output is designed to be pasted into a large language model prompt so that code can be written against a dataset that may contain protected health information.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/boyercb/codebookLLM}
+  \item \url{http://christopherbboyer.com/codebookLLM/}
+  \item Report bugs at \url{https://github.com/boyercb/codebookLLM/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Christopher Boyer \email{boyerc5@ccf.org}
 
