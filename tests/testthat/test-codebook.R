@@ -53,6 +53,44 @@ test_that("roles are assigned as expected", {
   expect_match(cb, 'name: "patient_mrn"\n(.|\n)*role: "id"')
 })
 
+test_that("integer64 numeric summaries work across formats and detail levels", {
+  skip_if_not_installed("bit64")
+  values <- c(1, 2, 4, 8, NA_real_)
+  df <- data.frame(amount = bit64::as.integer64(values))
+  original <- df
+
+  for (detail in c("safe", "full")) {
+    expected <- cb_num_summary(values, detail)
+    for (format in c("markdown", "yaml", "json")) {
+      cb <- as.character(llm_codebook(df, format = format, detail = detail))
+      expect_match(cb, expected, fixed = TRUE)
+      expect_match(cb, "integer64", fixed = TRUE)
+    }
+    col <- cb_profile_col(df$amount, "amount", nrow(df), detail, 12L, NULL, character())
+    expect_identical(col$role, "numeric")
+    expect_equal(col$n_missing, 1)
+    expect_equal(col$n_distinct, 4)
+  }
+  expect_identical(df, original)
+})
+
+test_that("integer64 precision warnings are not hidden by numeric summaries", {
+  skip_if_not_installed("bit64")
+  x <- bit64::as.integer64(c("9007199254740993", "9007199254740995",
+                            "9007199254740997"))
+  expect_warning(cb_num_summary(x, "full"), "precision lost")
+})
+
+test_that("structure and redaction avoid converting integer64 values", {
+  skip_if_not_installed("bit64")
+  x <- bit64::as.integer64(c("9007199254740993", "9007199254740995",
+                            "9007199254740997"))
+  expect_no_warning(cb <- llm_codebook(data.frame(amount = x), detail = "structure"))
+  expect_false(grepl("range=", as.character(cb), fixed = TRUE))
+  expect_no_warning(cb <- llm_codebook(data.frame(patient_amount = x), detail = "full"))
+  expect_match(as.character(cb), "<redacted: possible identifier>", fixed = TRUE)
+})
+
 test_that("gotcha notes are flagged", {
   cb <- as.character(llm_codebook(make_df()))
   expect_match(cb, "numeric values stored as character", fixed = TRUE)

@@ -79,6 +79,15 @@ redaction is applied at every detail level. The heuristic is a convenience,
 not a guarantee: review the output before sharing it.
 }
 
+\section{Integer64 columns}{
+
+\code{bit64::integer64} columns, commonly imported from Parquet, are converted to
+double precision only for numeric summaries. The input data and reported
+column classes are unchanged. Integers outside the exactly representable
+range of doubles (approximately +/-2^53) may lose precision, even with
+\code{detail = "full"}; the conversion emits a warning in that case.
+}
+
 \examples{
 df <- data.frame(
   patient_mrn = sprintf("M\%05d", 1:20),

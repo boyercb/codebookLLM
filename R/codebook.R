@@ -30,6 +30,13 @@
 #' redaction is applied at every detail level. The heuristic is a convenience,
 #' not a guarantee: review the output before sharing it.
 #'
+#' @section Integer64 columns:
+#' `bit64::integer64` columns, commonly imported from Parquet, are converted to
+#' double precision only for numeric summaries. The input data and reported
+#' column classes are unchanged. Integers outside the exactly representable
+#' range of doubles (approximately +/-2^53) may lose precision, even with
+#' `detail = "full"`; the conversion emits a warning in that case.
+#'
 #' @param data A data frame, tibble or data.table.
 #' @param name Dataset name to print. Defaults to the deparsed `data` argument.
 #' @param format Output format: `"markdown"` (default), `"yaml"` or `"json"`.

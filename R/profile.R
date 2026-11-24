@@ -63,6 +63,7 @@ cb_role <- function(x, n_distinct, n_nonmiss) {
 cb_num_summary <- function(x, detail) {
   v <- x[is.finite(x)]
   if (!length(v)) return(NA_character_)
+  if (inherits(v, "integer64")) v <- as.double(v)
   q <- stats::quantile(v, c(0, .25, .5, .75, 1), names = FALSE, type = 7)
   if (identical(detail, "full")) {
     sprintf("min=%s q25=%s median=%s q75=%s max=%s mean=%s sd=%s",
